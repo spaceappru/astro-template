@@ -4,12 +4,27 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "vite build --config vite-ts.config.ts && astro build",
+    "build-script": "vite build --config vite-ts.config.ts",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.3.0"
+    "@tailwindcss/vite": "^4.0.6",
+    "astro": "^5.3.0",
+    "astro-relative-links": "^0.4.2",
+    "tailwindcss": "^4.0.6"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.4",
+    "@yandex/ymaps3-types": "^1.0.15894956",
+    "fast-glob": "^3.3.3",
+    "rollup": "^4.34.7",
+    "typescript": "~5.7.2",
+    "vite": "^6.1.0",
+    "vite-plugin-full-reload": "^1.2.0",
+    "vite-plugin-run": "^0.6.1",
+    "vite-plugin-watch-and-run": "^1.7.3"
   },
   "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0"
 }
