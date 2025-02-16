@@ -3,12 +3,14 @@ import { defineConfig } from "astro/config";
 import FullReload from "vite-plugin-full-reload";
 import { run } from "vite-plugin-run";
 import relativeLinks from "astro-relative-links";
-
+import vitePluginTransformHtml from "./vite-plugin-transform-html";
 import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [relativeLinks()],
+  integrations: [relativeLinks(), 
+    // vitePluginTransformHtml()
+  ],
   trailingSlash: "never",
   devToolbar: { enabled: false },
   build: {
@@ -18,6 +20,17 @@ export default defineConfig({
   outDir: "build",
   scopedStyleStrategy: "class",
   vite: {
+    plugins: [
+      FullReload(["src/public/js/**/*.js"]),
+      run([
+        {
+          name: "typescript transform",
+          run: ["vite build --config vite-ts.config.ts"],
+          pattern: ["src/scripts/**/*.ts"],
+        },
+      ]),
+      tailwindcss(),
+    ],
     build: {
       assetsInlineLimit: 0,
       cssCodeSplit: false,
@@ -38,20 +51,10 @@ export default defineConfig({
       modules: false,
       preprocessorOptions: {
         scss: {
-          additionalData: '@use "./src/styles/mixins.scss" as *;',
+          api: "modern-compiler",
+          additionalData: '@use "/src/styles/mixins.scss" as *;',
         },
       },
     },
-    plugins: [
-      FullReload(["src/public/js/**/*.js"]),
-      run([
-        {
-          name: "typescript transform",
-          run: ["vite build --config vite-ts.config.ts"],
-          pattern: ["src/scripts/**/*.ts"],
-        },
-      ]),
-      tailwindcss(),
-    ],
   },
 });

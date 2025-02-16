@@ -4,22 +4,33 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "vite build --config vite-ts.config.ts && astro build",
+    "build": "vite build --config vite-ts.config.ts && astro build && npm run format",
     "build-script": "vite build --config vite-ts.config.ts",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "npx prettier build/*.html --write"
   },
   "dependencies": {
+    "@fancyapps/ui": "^5.0.36",
     "@tailwindcss/vite": "^4.0.6",
+    "accordion-js": "^3.4.0",
+    "air-datepicker": "^3.5.3",
     "astro": "^5.3.0",
     "astro-relative-links": "^0.4.2",
-    "tailwindcss": "^4.0.6"
+    "choices.js": "^11.0.3",
+    "swiper": "11.2.4",
+    "tailwindcss": "^4.0.6",
+    "tippy.js": "^6.3.7"
   },
   "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "^22.13.4",
     "@yandex/ymaps3-types": "^1.0.15894956",
     "fast-glob": "^3.3.3",
+    "fs-extra": "^11.3.0",
+    "prettier": "^3.5.1",
     "rollup": "^4.34.7",
+    "sass-embedded": "^1.85.0",
     "typescript": "~5.7.2",
     "vite": "^6.1.0",
     "vite-plugin-full-reload": "^1.2.0",
