@@ -8,8 +8,10 @@
       "./node_modules/@types",
       "./node_modules/@yandex/ymaps3-types"
     ],
+    "baseUrl": ".",
     "paths": {
-      "ymaps3": ["./node_modules/@yandex/ymaps3-types"]
+      "ymaps3": ["./node_modules/@yandex/ymaps3-types"],
+      "@components/*": ["src/components/*"]
     }
   }
 }

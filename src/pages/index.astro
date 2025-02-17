@@ -1,19 +1,5 @@
 ---
-import Layout from "../components/Layout.astro";
+import Layout from "@components/Layout.astro";
 ---
 
-<Layout title="123">
-  <div class="section">
-    <div class="section__container">123</div>
-  </div>
-</Layout>
-
-<style lang="scss">
-  .section {
-    @include section;
-
-    &__container {
-      grid-area: center;
-    }
-  }
-</style>
+<Layout title="Главная страница" scripts={["home-page"]}> 123 </Layout>

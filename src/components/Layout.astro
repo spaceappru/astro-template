@@ -1,8 +1,7 @@
 ---
-import normalize from "../styles/normalize.css?url";
 import swiper from "swiper/swiper-bundle.css?url";
 import fancybox from "@fancyapps/ui/dist/fancybox/fancybox.css?url";
-import accordion from "accordion-js/dist/accordion.css?url";
+import accordion from "accordion-js/dist/accordion.min.css?url";
 import choices from "choices.js/public/assets/styles/choices.min.css?url";
 import tippy from "tippy.js/dist/tippy.css?url";
 import datepicker from "air-datepicker/air-datepicker.css?url";
@@ -10,11 +9,20 @@ import datepicker from "air-datepicker/air-datepicker.css?url";
 import "../styles/global.css";
 
 interface Props {
+  /**
+   * title в head
+   */
   title: string;
+  /**
+   * Названия скриптов из папки src/scripts/entity
+   *
+   * Скрипт general уже подключен
+   */
+  scripts?: string[];
   children: any;
 }
 
-const { title } = Astro.props;
+const { title, scripts } = Astro.props;
 
 const version = String(Date.now()).substring(5);
 ---
@@ -24,14 +32,20 @@ const version = String(Date.now()).substring(5);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>{title}</title>
-    <!-- <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="stylesheet" href={swiper} />
-    <link rel="stylesheet" href={fancybox} /> -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <!-- <link rel="stylesheet" href={swiper} /> -->
+    <!-- <link rel="stylesheet" href={fancybox} /> -->
     <!-- <link rel="stylesheet" href={accordion} /> -->
     <!-- <link rel="stylesheet" href={choices} /> -->
     <!-- <link rel="stylesheet" href={tippy} /> -->
     <!-- <link rel="stylesheet" href={datepicker} /> -->
-    <!-- <link rel="stylesheet" href=`/fonts/icomoon/style.css?v=0.${version}` /> -->
+    <link rel="stylesheet" href=`/fonts/iconly/style.css?v=0.${version}` />
+    <script type="module" src={`/js/general.js?v=0.${version}`}></script>
+    {
+      scripts?.map((item) => (
+        <script type="module" src={`/js/${item}.js?v=0.${version}`} />
+      ))
+    }
   </head>
   <body>
     <slot />
