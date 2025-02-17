@@ -3,14 +3,11 @@ import { defineConfig } from "astro/config";
 import FullReload from "vite-plugin-full-reload";
 import { run } from "vite-plugin-run";
 import relativeLinks from "astro-relative-links";
-import vitePluginTransformHtml from "./vite-plugin-transform-html";
 import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [relativeLinks(), 
-    // vitePluginTransformHtml()
-  ],
+  integrations: [relativeLinks()],
   trailingSlash: "never",
   devToolbar: { enabled: false },
   build: {

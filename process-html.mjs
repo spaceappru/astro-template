@@ -15,7 +15,7 @@ await Promise.all(
     let headings = head.querySelectorAll("link");
 
     let style = headings[headings.length - 1];
-    style.setAttribute("href", `./css/style.css?v=0.${dateNow}`);
+    style.setAttribute("href", `./css/custom-style.css?v=0.${dateNow}`);
 
     html = dom.serialize();
 

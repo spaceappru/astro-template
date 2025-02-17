@@ -33,9 +33,33 @@ $p: 20px;
   }
 }
 
+@mixin hover {
+  @media (hover: hover) {
+    @content;
+  }
+}
+
+@mixin no-hover {
+  @media (hover: none) {
+    @content;
+  }
+}
+
 $fluid-start: $breakpoint-laptop + $p + $p;
 $fluid-end: $container-desktop + $p + $p;
 $fluid-screen: 1920px;
+
+@function round($number, $decimals: 0) {
+  $n: 1;
+
+  @if $decimals > 0 {
+    @for $i from 1 through $decimals {
+      $n: $n * 10;
+    }
+  }
+
+  @return math.div(math.round($number * $n), $n);
+}
 
 @function px-to-rem($px) {
   $rems: math.div($px, 16px) * 1rem;

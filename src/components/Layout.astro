@@ -20,9 +20,13 @@ interface Props {
    */
   scripts?: string[];
   children: any;
+  /**
+   * Подключение Яндекс.Карты
+   */
+  ymap?: boolean;
 }
 
-const { title, scripts } = Astro.props;
+const { title, scripts, ymap } = Astro.props;
 
 const version = String(Date.now()).substring(5);
 ---
@@ -39,8 +43,17 @@ const version = String(Date.now()).substring(5);
     <!-- <link rel="stylesheet" href={choices} /> -->
     <!-- <link rel="stylesheet" href={tippy} /> -->
     <!-- <link rel="stylesheet" href={datepicker} /> -->
-    <link rel="stylesheet" href=`/fonts/iconly/style.css?v=0.${version}` />
+    <link rel="stylesheet" href=`/fonts/iconly/iconly.min.css?v=0.${version}` />
     <script type="module" src={`/js/general.js?v=0.${version}`}></script>
+    {
+      ymap ? (
+        <script
+          is:inline
+          src={`https://api-maps.yandex.ru/v3/?apikey=${import.meta.env.PUBLIC_YMAP_API_KEY}&lang=ru_RU`}
+          defer
+        />
+      ) : null
+    }
     {
       scripts?.map((item) => (
         <script type="module" src={`/js/${item}.js?v=0.${version}`} />
