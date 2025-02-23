@@ -25,7 +25,7 @@ export default defineConfig({
         {
           name: "typescript transform",
           run: ["vite build --config vite-ts.config.ts"],
-          pattern: ["src/scripts/**/*.ts"],
+          pattern: ["src/scripts/**/*.ts", "src/scripts/**/*.svelte"],
         },
       ]),
       tailwindcss(),

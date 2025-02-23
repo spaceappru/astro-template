@@ -1,0 +1,54 @@
+---
+interface Props {
+  variant: "blog";
+}
+
+const { variant } = Astro.props;
+---
+
+<div class:list={["prose", `prose--${variant}`]}>
+  <slot />
+</div>
+
+<style is:global lang="scss">
+  .prose {
+    &--blog {
+      /* цвет текста */
+      --prose-text: inherit;
+
+      /* цвет заголовков */
+      --prose-title: inherit;
+
+      /* цвет ссылок */
+      --prose-link: inherit;
+
+      /* цвет маркеров списков */
+      --prose-bullet: inherit;
+
+      /* цвет цифр списка */
+      --prose-counter: inherit;
+
+      h1 {
+      }
+
+      h2 {
+      }
+
+      h3 {
+      }
+
+      h4 {
+      }
+
+      h5 {
+      }
+
+      p {
+      }
+
+      a {
+        
+      }
+    }
+  }
+</style>

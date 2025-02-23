@@ -1,6 +1,6 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"],
+  "include": [".astro/types.d.ts", "**/*", "src/**/*.svelte"],
   "exclude": ["dist"],
   "compilerOptions": {
     "allowJs": true,
@@ -11,7 +11,8 @@
     "baseUrl": ".",
     "paths": {
       "ymaps3": ["./node_modules/@yandex/ymaps3-types"],
-      "@components/*": ["src/components/*"]
+      "@components/*": ["src/components/*"],
+      "@lib/*": ["src/scripts/lib/*"]
     }
   }
 }

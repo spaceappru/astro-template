@@ -1,0 +1,100 @@
+---
+type Positions = "left" | "center" | "right" | "full";
+
+interface Props {
+  /**
+   * Позиция дочернего элемента
+   *
+   * @default center
+   */
+  position?: Positions;
+
+  /**
+   * Позиция дочернего элемента на desktop
+   */
+  desktop?: Positions;
+
+  /**
+   * Позиция дочернего элемента на laptop
+   */
+  laptop?: Positions;
+
+  /**
+   * Позиция дочернего элемента на tablet
+   */
+  tablet?: Positions;
+
+  /**
+   * Позиция дочернего элемента на phone
+   */
+  phone?: Positions;
+}
+
+const { position = "center", desktop, laptop, tablet, phone } = Astro.props;
+---
+
+<section
+  class:list={[
+    "section",
+    `section--${position}`,
+    desktop && `section--desktop-${desktop}`,
+    laptop && `section--laptop-${laptop}`,
+    tablet && `section--tablet-${tablet}`,
+    phone && `section--phone-${phone}`,
+  ]}
+>
+  <div class="section__container">
+    <slot />
+  </div>
+</section>
+
+<style is:global lang="scss">
+  .section {
+    @include section;
+
+    $positions: "left", "center", "right", "full";
+
+    @each $position in $positions {
+      &--#{$position} {
+        --section-position: #{$position};
+      }
+    }
+
+    @each $position in $positions {
+      @include desktop {
+        &--desktop-#{$position} {
+          --section-position: #{$position};
+        }
+      }
+    }
+
+    @each $position in $positions {
+      @include laptop {
+        &--laptop-#{$position} {
+          --section-position: #{$position};
+        }
+      }
+    }
+
+    @each $position in $positions {
+      @include tablet {
+        &--tablet-#{$position} {
+          --section-position: #{$position};
+        }
+      }
+    }
+
+    @each $position in $positions {
+      @include phone {
+        &--phone-#{$position} {
+          --section-position: #{$position};
+        }
+      }
+    }
+
+    &__container {
+      display: grid;
+      grid-area: var(--section-position);
+    }
+  }
+</style>

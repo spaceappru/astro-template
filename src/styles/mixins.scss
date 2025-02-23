@@ -4,8 +4,6 @@ $breakpoint-tablet: 767px;
 $breakpoint-phone: 575px;
 
 $container-desktop: 1306px;
-$container-laptop: 920px;
-$container-tablet: 640px;
 
 $p: 20px;
 
@@ -95,23 +93,21 @@ $fluid-screen: 1920px;
 }
 
 @mixin section {
-  --container-width: #{$container-desktop};
-  --p: #{$p};
-
   display: grid;
   grid-template-columns:
-    [full-start left-start] minmax(var(--p), 1fr)
+    [full-start left-start] minmax(var(--container-padding), 1fr)
     [right-start center-start] minmax(0, var(--container-width))
-    [left-end center-end] minmax(var(--p), 1fr) [full-end right-end];
+    [left-end center-end] minmax(var(--container-padding), 1fr)
+    [full-end right-end];
 
   grid-template-rows: [full-start left-start center-start right-start] auto [full-end left-end center-end right-end];
 
   @media (max-width: $breakpoint-laptop) {
-    --container-width: #{$container-laptop};
+    --container-width: var(--container-laptop);
   }
 
   @media (max-width: $breakpoint-tablet) {
-    --container-width: #{$container-tablet};
+    --container-width: var(--container-tablet);
   }
 
   @media (max-width: $breakpoint-phone) {

@@ -1,1 +1,17 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@config "../../tailwind-typography.config.js";
+
+:root {
+  /* размер контейнера */
+  --container-width: 1306px;
+
+  /* размер контейнера laptop */
+  --container-laptop: 920px;
+
+  /* размер контейнера tablet */
+  --container-tablet: 640px;
+
+  /* отступ контейнера */
+  --container-padding: 20px;
+}
