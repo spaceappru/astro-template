@@ -18,9 +18,7 @@ export default defineConfig({
   scopedStyleStrategy: "class",
   vite: {
     plugins: [
-      //@ts-ignore
       FullReload(["src/public/js/**/*.js"]),
-      //@ts-ignore
       run([
         {
           name: "typescript transform",
