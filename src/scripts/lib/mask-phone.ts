@@ -1,14 +1,14 @@
-import IMask from "imask/holder";
+import IMask, { type MaskedPatternOptions } from "imask";
 import "imask/masked/pattern";
 
-const maskOptions = {
-  mask: "+{7}(000) 000-00-00",
+const maskOptions: MaskedPatternOptions = {
+  mask: "+{7} (000) 000-00-00",
 };
 
 /**
  * Добавление маски телефона на список элементов
  */
-export function maskPhone(elements: NodeListOf<Element>) {
+function maskPhone(elements: NodeListOf<Element>) {
   elements.forEach((element) => {
     if (element instanceof HTMLElement) {
       IMask(element, maskOptions);
@@ -16,6 +16,9 @@ export function maskPhone(elements: NodeListOf<Element>) {
   });
 }
 
+/**
+ * Инпуты телефон
+ */
 const phone = document.querySelectorAll(".input--phone");
 
 maskPhone(phone);

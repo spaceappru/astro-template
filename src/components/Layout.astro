@@ -4,7 +4,7 @@ import fancybox from "@fancyapps/ui/dist/fancybox/fancybox.css?url";
 import accordion from "accordion-js/dist/accordion.min.css?url";
 import choices from "choices.js/public/assets/styles/choices.min.css?url";
 import tippy from "tippy.js/dist/tippy.css?url";
-import datepicker from "air-datepicker/air-datepicker.css?url";
+import datepicker from "vanilla-calendar-pro/styles/index.css?url";
 
 import "../styles/global.css";
 
@@ -44,7 +44,6 @@ const version = String(Date.now()).substring(5);
     <!-- <link rel="stylesheet" href={tippy} /> -->
     <!-- <link rel="stylesheet" href={datepicker} /> -->
     <link rel="stylesheet" href=`/fonts/iconly/iconly.min.css?v=0.${version}` />
-    <script type="module" src={`/js/general.js?v=0.${version}`}></script>
     {
       ymap ? (
         <script
@@ -54,6 +53,7 @@ const version = String(Date.now()).substring(5);
         />
       ) : null
     }
+    <script type="module" src={`/js/general.js?v=0.${version}`}></script>
     {
       scripts?.map((item) => (
         <script type="module" src={`/js/${item}.js?v=0.${version}`} />

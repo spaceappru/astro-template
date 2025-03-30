@@ -1,0 +1,66 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends Omit<HTMLAttributes<"input">, "class" | "type"> {
+  /**
+   * Обязательно, чтобы работал клик по лейблу
+   */
+  id: string;
+}
+
+const { id, ...restProps } = Astro.props;
+---
+
+<div class="checkbox">
+  <input
+    {...restProps}
+    id={id}
+    type="checkbox"
+    class:list={["checkbox__element"]}
+  />
+  <label for={id} class:list={["checkbox__label"]}><slot /></label>
+</div>
+
+<style is:global lang="scss">
+  .checkbox {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+
+    &__element {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      padding: 0;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      display: inline-block;
+      vertical-align: middle;
+      background-origin: border-box;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+      flex-shrink: 0;
+
+      background-color: gainsboro;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      transition: all var(--transition);
+
+      &:checked {
+        // SVG в CSS: https://www.svgbackgrounds.com/tools/svg-to-css/
+        $svg: url('data:image/svg+xml,<svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.02406 2.09917C7.31738 1.80661 7.31737 1.33148 7.02406 1.03893C6.73183 0.74745 6.25883 0.74744 5.96658 1.0389L3.62512 3.37411L2.03342 1.78667C1.74117 1.49521 1.26817 1.49522 0.975938 1.7867C0.682625 2.07925 0.682622 2.55438 0.975931 2.84694L2.99739 4.86322C3.34433 5.20928 3.9059 5.20928 4.25285 4.86323L7.02406 2.09917Z" fill="white"/></svg>');
+
+        background-size: 12px;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-image: $svg;
+        background-color: black;
+      }
+    }
+
+    &__label {
+    }
+  }
+</style>

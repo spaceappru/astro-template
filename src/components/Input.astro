@@ -1,0 +1,39 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends Omit<HTMLAttributes<"input">, "class"> {
+  /**
+   * Маска для инпута
+   *
+   * phone — scripts/lib/mask-phone.ts
+   *
+   * money — scripts/lib/mask-money.ts
+   */
+  mask?: "phone" | "money";
+  /**
+   * Класс-селектор в файле scripts/lib/datepicker.ts
+   */
+  datepicker?: "js-calendar";
+}
+
+const { mask, datepicker, ...restProps } = Astro.props;
+---
+
+<input
+  {...restProps}
+  class:list={["input", mask && `input--${mask}`, datepicker]}
+/>
+
+<style is:global lang="scss">
+  .input {
+    padding: 4px 8px;
+    border: 1px solid gray;
+    transition: all var(--transition);
+
+    &:focus,
+    &:focus-visible {
+      outline: unset;
+      border: 1px solid black;
+    }
+  }
+</style>

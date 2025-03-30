@@ -1,0 +1,53 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends Omit<HTMLAttributes<"div">, "class"> {
+  /**
+   * Лейбл над инпутом
+   */
+  label?: string;
+
+  /**
+   * Сообщение об ошибке под инпутом
+   */
+  error?: string;
+}
+
+const { label, error, ...restProps } = Astro.props;
+---
+
+<div {...restProps} class="field">
+  {label ? <label class="field__label">{label}</label> : null}
+
+  <div class="field__input">
+    <slot />
+  </div>
+
+  {error ? <div class="field__error">{error}</div> : null}
+</div>
+
+<style is:global lang="scss">
+  .field {
+    position: relative;
+    display: grid;
+    gap: 4px;
+
+    &__label {
+      line-height: 1;
+      font-weight: 500;
+    }
+
+    &__input {
+      display: grid;
+    }
+
+    &__error {
+      position: absolute;
+      color: red;
+      font-size: 12px;
+      line-height: 1;
+      bottom: -1.2em;
+      font-weight: 500;
+    }
+  }
+</style>

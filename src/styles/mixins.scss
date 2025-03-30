@@ -1,32 +1,61 @@
-$breakpoint-desktop: 1280px - 1px;
-$breakpoint-laptop: 1024px - 1px;
-$breakpoint-tablet: 768px - 1px;
-$breakpoint-phone: 576px - 1px;
+$breakpoint-desktop: 1280px;
+$breakpoint-laptop: 1024px;
+$breakpoint-tablet: 768px;
+$breakpoint-phone: 576px;
+
+$df-breakpoint-desktop: 1280px - 1px;
+$df-breakpoint-laptop: 1024px - 1px;
+$df-breakpoint-tablet: 768px - 1px;
+$df-breakpoint-phone: 576px - 1px;
 
 $container-desktop: 1306px;
 
 $p: 20px;
 
 @mixin desktop {
-  @media (max-width: $breakpoint-desktop) {
+  @media (max-width: $df-breakpoint-desktop) {
     @content;
   }
 }
 
 @mixin laptop {
-  @media (max-width: $breakpoint-laptop) {
+  @media (max-width: $df-breakpoint-laptop) {
     @content;
   }
 }
 
 @mixin tablet {
-  @media (max-width: $breakpoint-tablet) {
+  @media (max-width: $df-breakpoint-tablet) {
     @content;
   }
 }
 
 @mixin phone {
-  @media (max-width: $breakpoint-phone) {
+  @media (max-width: $df-breakpoint-phone) {
+    @content;
+  }
+}
+
+@mixin desktop-min {
+  @media (min-width: $breakpoint-desktop) {
+    @content;
+  }
+}
+
+@mixin laptop-min {
+  @media (min-width: $breakpoint-laptop) {
+    @content;
+  }
+}
+
+@mixin tablet-min {
+  @media (min-width: $breakpoint-tablet) {
+    @content;
+  }
+}
+
+@mixin phone-min {
+  @media (min-width: $breakpoint-phone) {
     @content;
   }
 }

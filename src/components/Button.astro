@@ -1,0 +1,54 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import { undefined } from "astro:schema";
+
+interface Props extends Omit<HTMLAttributes<"button">, "class"> {
+  /**
+   * Если указать ссылку, то будет тег <а>, иначе <button>
+   */
+  href?: string;
+  /**
+   * Вариации цветов
+   */
+  variant?: undefined;
+  /**
+   * Вариации размеров
+   */
+  size?: undefined;
+
+  /**
+   * Класс-селектор в файле scripts/lib/modal.ts
+   */
+  modal?: "js-modal";
+}
+
+const { href, variant, modal, size, ...restProps } = Astro.props;
+
+const Element = href ? "a" : "button";
+---
+
+<Element
+  {...restProps}
+  href={href}
+  class:list={[
+    "button",
+    variant && `button--${variant}`,
+    variant && `button--${size}`,
+    href && modal ? modal : undefined,
+  ]}
+>
+  <slot />
+</Element>
+
+<style is:global lang="scss">
+  .button {
+    background-color: black;
+    color: white;
+    transition: all var(--transition);
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+</style>

@@ -1,0 +1,21 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends Omit<HTMLAttributes<"div">, "class"> {
+  /**
+   * Обязательно для селектора скрипта Яндекс.Карты
+   */
+  id: string;
+}
+
+const { ...restProps } = Astro.props;
+---
+
+<div {...restProps} class="yandex-map"></div>
+
+<style is:global lang="scss">
+  .yandex-map {
+    height: 500px;
+    width: 500px;
+  }
+</style>
