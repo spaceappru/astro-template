@@ -5,8 +5,8 @@
   "compilerOptions": {
     "allowJs": true,
     "typeRoots": [
-      "./node_modules/@types",
-      "./node_modules/@yandex/ymaps3-types"
+      "./node_modules/@types"
+      // "./node_modules/@yandex/ymaps3-types"
     ],
     "baseUrl": ".",
     "paths": {
