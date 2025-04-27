@@ -1,0 +1,8 @@
+{
+  "[svelte]": {
+    "editor.defaultFormatter": "svelte.svelte-vscode"
+  },
+  "editor.formatOnSave": true,
+  "svelte.enable-ts-plugin": true,
+  "cSpell.words": ["spaceapp"]
+}

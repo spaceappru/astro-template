@@ -3,24 +3,17 @@
 @config "../../tailwind-typography.config.js";
 
 :root {
-  /* размер контейнера */
-  --container-width: 1306px;
-
-  /* размер контейнера laptop */
-  --container-laptop: 920px;
-
-  /* размер контейнера tablet */
-  --container-tablet: 640px;
-
-  /* отступ контейнера */
+  /* боковые отступы контейнера */
   --container-padding: 20px;
 
-  --transition: 0.2s ease-in-out;
-}
+  /* размер контейнера начиная с phone */
+  --container-phone: 640px;
 
-@theme {
-  --breakpoint-desktop: 1280px;
-  --breakpoint-laptop: 1024px;
-  --breakpoint-tablet: 768px;
-  --breakpoint-phone: 576px;
+  /* размер контейнера начиная с tablet */
+  --container-tablet: 768px;
+
+  /* размер контейнера начиная с laptop */
+  --container-laptop: 1306px;
+
+  --transition: 0.2s ease-in-out;
 }

@@ -3,40 +3,53 @@ type Positions = "left" | "center" | "right" | "full";
 
 interface Props {
   /**
-   * Позиция дочернего элемента
+   * Позиция дочернего элемента на мобильном экране
    *
    * @default center
    */
   position?: Positions;
 
   /**
-   * Позиция дочернего элемента на desktop
+   * Позиция дочернего элемента начиная с phone
    */
-  desktop?: Positions;
+  phone?: Positions;
 
   /**
-   * Позиция дочернего элемента на laptop
-   */
-  laptop?: Positions;
-
-  /**
-   * Позиция дочернего элемента на tablet
+   * Позиция дочернего элемента начиная с tablet
    */
   tablet?: Positions;
 
   /**
-   * Позиция дочернего элемента на phone
+   * Позиция дочернего элемента начиная с laptop
    */
-  phone?: Positions;
+  laptop?: Positions;
+
+  /**
+   * Позиция дочернего элемента начиная с desktop
+   */
+  desktop?: Positions;
+
+  /**
+   * Позиция дочернего элемента начиная с widescreen
+   */
+  widescreen?: Positions;
 }
 
-const { position = "center", desktop, laptop, tablet, phone } = Astro.props;
+const {
+  position = "center",
+  widescreen,
+  desktop,
+  laptop,
+  tablet,
+  phone,
+} = Astro.props;
 ---
 
 <section
   class:list={[
     "section",
     `section--${position}`,
+    widescreen && `section--widescreen-${desktop}`,
     desktop && `section--desktop-${desktop}`,
     laptop && `section--laptop-${laptop}`,
     tablet && `section--tablet-${tablet}`,
@@ -61,23 +74,15 @@ const { position = "center", desktop, laptop, tablet, phone } = Astro.props;
     }
 
     @each $position in $positions {
-      @include desktop {
-        &--desktop-#{$position} {
+      @include phone-min {
+        &--phone-#{$position} {
           --section-position: #{$position};
         }
       }
     }
 
     @each $position in $positions {
-      @include laptop {
-        &--laptop-#{$position} {
-          --section-position: #{$position};
-        }
-      }
-    }
-
-    @each $position in $positions {
-      @include tablet {
+      @include tablet-min {
         &--tablet-#{$position} {
           --section-position: #{$position};
         }
@@ -85,8 +90,24 @@ const { position = "center", desktop, laptop, tablet, phone } = Astro.props;
     }
 
     @each $position in $positions {
-      @include phone {
-        &--phone-#{$position} {
+      @include laptop-min {
+        &--laptop-#{$position} {
+          --section-position: #{$position};
+        }
+      }
+    }
+
+    @each $position in $positions {
+      @include desktop-min {
+        &--desktop-#{$position} {
+          --section-position: #{$position};
+        }
+      }
+    }
+
+    @each $position in $positions {
+      @include widescreen-min {
+        &--widescreen-#{$position} {
           --section-position: #{$position};
         }
       }

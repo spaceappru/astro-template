@@ -1,49 +1,15 @@
-$breakpoint-desktop: 1280px;
-$breakpoint-laptop: 1024px;
-$breakpoint-tablet: 768px;
-$breakpoint-phone: 576px;
+// screen breakpoints
 
-$df-breakpoint-desktop: 1280px - 1px;
-$df-breakpoint-laptop: 1024px - 1px;
-$df-breakpoint-tablet: 768px - 1px;
-$df-breakpoint-phone: 576px - 1px;
+$breakpoint-phone: 640px; // tailwind sm
+$breakpoint-tablet: 768px; // tailwind md
+$breakpoint-laptop: 1024px; // tailwind lg
+$breakpoint-desktop: 1280px; // tailwind xl
+$breakpoint-widescreen: 1536px; // tailwind 2xl
 
-$container-desktop: 1306px;
+// mobile-first
 
-$p: 20px;
-
-@mixin desktop {
-  @media (max-width: $df-breakpoint-desktop) {
-    @content;
-  }
-}
-
-@mixin laptop {
-  @media (max-width: $df-breakpoint-laptop) {
-    @content;
-  }
-}
-
-@mixin tablet {
-  @media (max-width: $df-breakpoint-tablet) {
-    @content;
-  }
-}
-
-@mixin phone {
-  @media (max-width: $df-breakpoint-phone) {
-    @content;
-  }
-}
-
-@mixin desktop-min {
-  @media (min-width: $breakpoint-desktop) {
-    @content;
-  }
-}
-
-@mixin laptop-min {
-  @media (min-width: $breakpoint-laptop) {
+@mixin phone-min {
+  @media (min-width: $breakpoint-phone) {
     @content;
   }
 }
@@ -54,11 +20,57 @@ $p: 20px;
   }
 }
 
-@mixin phone-min {
-  @media (min-width: $breakpoint-phone) {
+@mixin laptop-min {
+  @media (min-width: $breakpoint-laptop) {
     @content;
   }
 }
+
+@mixin desktop-min {
+  @media (min-width: $breakpoint-desktop) {
+    @content;
+  }
+}
+
+@mixin widescreen-min {
+  @media (min-width: $breakpoint-widescreen) {
+    @content;
+  }
+}
+
+// desktop-first
+
+@mixin widescreen {
+  @media (max-width: ($breakpoint-widescreen - 1px)) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (max-width: ($breakpoint-desktop - 1px)) {
+    @content;
+  }
+}
+
+@mixin laptop {
+  @media (max-width: ($breakpoint-laptop - 1px)) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: ($breakpoint-tablet - 1px)) {
+    @content;
+  }
+}
+
+@mixin phone {
+  @media (max-width: ($breakpoint-phone - 1px)) {
+    @content;
+  }
+}
+
+// utility
 
 @mixin hover {
   @media (hover: hover) {
@@ -72,74 +84,27 @@ $p: 20px;
   }
 }
 
-$fluid-start: $breakpoint-laptop + $p + $p;
-$fluid-end: $container-desktop + $p + $p;
-$fluid-screen: 1920px;
-
-@function round($number, $decimals: 0) {
-  $n: 1;
-
-  @if $decimals > 0 {
-    @for $i from 1 through $decimals {
-      $n: $n * 10;
-    }
-  }
-
-  @return math.div(math.round($number * $n), $n);
-}
-
-@function px-to-rem($px) {
-  $rems: math.div($px, 16px) * 1rem;
-  @return $rems;
-}
-
-@function fluid-factory(
-  $min-size,
-  $max-size,
-  $min-breakpoint,
-  $max-breakpoint,
-  $unit: vw
-) {
-  $slope: math.div($max-size - $min-size, $max-breakpoint - $min-breakpoint);
-  $slope-to-unit: round($slope * 100, 3);
-  $intercept-rem: round(px-to-rem($min-size - $slope * $min-breakpoint), 3);
-  $min-size-rem: round(px-to-rem($min-size), 3);
-  $max-size-rem: round(px-to-rem($max-size), 3);
-
-  @return clamp(
-    #{$min-size-rem},
-    #{$slope-to-unit}#{$unit} + #{$intercept-rem},
-    #{$max-size-rem}
-  );
-}
-
-@function fluid($min-size, $max-size) {
-  @return fluid-factory($min-size, $max-size, $fluid-start, $fluid-end, vw);
-}
-
-@function fluid-screen($min-size, $max-size) {
-  @return fluid-factory($min-size, $max-size, $fluid-start, $fluid-screen, vw);
-}
-
 @mixin section {
+  --_container: 100%;
+
   display: grid;
   grid-template-columns:
     [full-start left-start] minmax(var(--container-padding), 1fr)
-    [right-start center-start] minmax(0, var(--container-width))
+    [right-start center-start] minmax(0, var(--_container))
     [left-end center-end] minmax(var(--container-padding), 1fr)
     [full-end right-end];
 
   grid-template-rows: [full-start left-start center-start right-start] auto [full-end left-end center-end right-end];
 
-  @media (max-width: $breakpoint-laptop) {
-    --container-width: var(--container-laptop);
+  @include phone-min {
+    --_container: var(--container-phone);
   }
 
-  @media (max-width: $breakpoint-tablet) {
-    --container-width: var(--container-tablet);
+  @include tablet-min {
+    --_container: var(--container-tablet);
   }
 
-  @media (max-width: $breakpoint-phone) {
-    --container-width: 100%;
+  @include laptop-min {
+    --_container: var(--container-laptop);
   }
 }
