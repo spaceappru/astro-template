@@ -45,7 +45,7 @@ const {
 } = Astro.props;
 ---
 
-<section
+<div
   class:list={[
     "section",
     `section--${position}`,
@@ -59,7 +59,7 @@ const {
   <div class="section__container">
     <slot />
   </div>
-</section>
+</div>
 
 <style is:global lang="scss">
   .section {

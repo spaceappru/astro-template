@@ -1,0 +1,59 @@
+---
+interface Props {
+  /**
+   * список элементов
+   */
+  items: string[];
+}
+
+const { items } = Astro.props;
+---
+
+<div class:list={["breadcrumb"]}>
+  <div class="breadcrumb__container">
+    <span>
+      {
+        items.slice(0, -1).map((item) => (
+          <span>
+            <a href="#">{item}</a>
+          </span>
+        ))
+      }
+      <span class="breadcrumb_last">{items.slice(-1)}</span>
+    </span>
+  </div>
+</div>
+
+<style is:global lang="scss">
+  .breadcrumb {
+    font-size: 14px;
+
+    &__container {
+      & a {
+        margin-right: 18px;
+
+        transition: var(--transition);
+        color: gray;
+
+        &:hover {
+          color: blue;
+        }
+      }
+    }
+  }
+
+  /* маркер между элементами*/
+  .breadcrumb__container span:not(:first-child) a::before,
+  .breadcrumb_last::before {
+    content: "";
+    height: 6px;
+    width: 6px;
+    background-color: black;
+    display: inline-flex;
+    border-radius: 999px;
+    margin-right: 20px;
+
+    /* вертикальное выравнивание маркера */
+    vertical-align: 2px;
+  }
+</style>

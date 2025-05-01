@@ -17,7 +17,7 @@ function copyFiles(options: CopyFilesOptions): Plugin {
       try {
         if (!fs.existsSync(options.sourceDir)) {
           console.warn(
-            `[copy-files] Source directory does not exist: ${options.sourceDir}`
+            `[copy-files] Source directory does not exist: ${options.sourceDir}`,
           );
           return;
         }
@@ -34,11 +34,7 @@ function copyFiles(options: CopyFilesOptions): Plugin {
           fs.copySync(sourcePath, destPath, {
             overwrite: true,
           });
-        //   console.log(`[copy-files] Copied ${sourcePath} to ${destPath}`);
         }
-        // console.log(
-        //   `[copy-files] Successfully copied files from ${options.sourceDir} to ${options.destDir}`
-        // );
       } catch (err) {
         console.error("[copy-files] Error copying files:", err);
       }

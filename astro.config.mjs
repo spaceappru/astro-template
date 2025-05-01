@@ -1,6 +1,5 @@
 // @ts-check
 import { defineConfig } from "astro/config";
-import FullReload from "vite-plugin-full-reload";
 import { run } from "vite-plugin-run";
 import relativeLinks from "astro-relative-links";
 import tailwindcss from "@tailwindcss/vite";
@@ -18,7 +17,6 @@ export default defineConfig({
   scopedStyleStrategy: "class",
   vite: {
     plugins: [
-      FullReload(["src/public/js/**/*.js"]),
       run([
         {
           name: "typescript transform",
