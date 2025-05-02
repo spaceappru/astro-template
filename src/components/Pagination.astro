@@ -1,0 +1,75 @@
+<div class="pagination">
+  <a href="#" class="pagination__prev icon-chevron"></a>
+  <a href="#">1</a>
+  <a href="#" class="active">2</a>
+  <a href="#">3</a>
+  <a href="#">...</a>
+  <a href="#">10</a>
+  <a href="#" class="pagination__next icon-chevron"></a>
+</div>
+
+<style is:global lang="scss">
+  .pagination {
+    gap: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    a {
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    /* кнопки назад и вперёд */
+    &__prev,
+    &__next {
+      width: 32px;
+      height: 32px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      margin-left: 8px;
+      border: 1px solid black;
+
+      @include hover {
+        &:hover {
+          background-color: black;
+          color: white;
+        }
+      }
+    }
+
+    &__prev {
+      margin-left: unset;
+      margin-right: 8px;
+
+      &::before {
+        transform: rotate(180deg);
+      }
+    }
+
+    /* элементы страниц */
+    a:not(&__prev, &__next) {
+      width: 32px;
+      height: 32px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 1px solid gray;
+
+      &:hover {
+        background-color: gray;
+        color: white;
+      }
+    }
+
+    .active {
+      background-color: black;
+      color: white;
+    }
+  }
+</style>
