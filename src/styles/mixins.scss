@@ -87,6 +87,11 @@ $breakpoint-widescreen: 1536px; // tailwind 2xl
 @mixin section {
   --_container: 100%;
 
+  --container-offset: max(
+    calc(100vw - var(--_container)) / 2,
+    var(--container-padding)
+  );
+
   display: grid;
   grid-template-columns:
     [full-start left-start] minmax(var(--container-padding), 1fr)
