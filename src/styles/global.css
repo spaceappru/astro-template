@@ -3,16 +3,16 @@
 @config "../../tailwind-typography.config.js";
 
 :root {
-  /* боковые отступы контейнера */
+  /* минимальные боковые отступы контейнера */
   --container-padding: 20px;
 
-  /* размер контейнера начиная с phone */
+  /* размер контейнера секции начиная с phone */
   --container-phone: 640px;
 
-  /* размер контейнера начиная с tablet */
+  /* размер контейнера секции начиная с tablet */
   --container-tablet: 768px;
 
-  /* размер контейнера начиная с laptop */
+  /* размер контейнера секции начиная с laptop */
   --container-laptop: 1306px;
 
   --transition: 0.2s ease-in-out;
