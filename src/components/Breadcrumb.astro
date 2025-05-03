@@ -26,20 +26,33 @@ const { items } = Astro.props;
 
 <style is:global lang="scss">
   .breadcrumb {
+    /* цвет ссылки */
+    --breadcrumb-link-color: gray;
+    /* цвет последнего элемента */
+    --breadcrumb-last-color: black;
+    /* цвет маркера */
+    --breadcrumb-marker-color: black;
+
     font-size: 14px;
 
-    &__container {
-      & a {
-        margin-right: 18px;
-
-        transition: var(--transition);
-        color: gray;
-
-        &:hover {
-          color: blue;
-        }
-      }
+    a {
+      padding-right: 18px;
+      transition: var(--transition);
+      color: var(--breadcrumb-link-color);
     }
+  }
+
+  /* hover на ссылку */
+  .breadcrumb a:hover {
+    /* цвет hover ссылки */
+    --breadcrumb-link-color: blue;
+  }
+
+  /* изменение маркера при hover на ссылку */
+  .breadcrumb__container span span:hover + span a::before,
+  .breadcrumb__container span span:hover + .breadcrumb_last::before {
+    /* цвет hover маркера */
+    --breadcrumb-marker-color: blue;
   }
 
   /* маркер между элементами*/
@@ -48,12 +61,16 @@ const { items } = Astro.props;
     content: "";
     height: 6px;
     width: 6px;
-    background-color: black;
+    background-color: var(--breadcrumb-marker-color);
     display: inline-flex;
     border-radius: 999px;
     margin-right: 20px;
 
     /* вертикальное выравнивание маркера */
     vertical-align: 2px;
+  }
+
+  .breadcrumb_last {
+    color: var(--breadcrumb-last-color);
   }
 </style>

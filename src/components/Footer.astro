@@ -1,0 +1,25 @@
+---
+interface Props {}
+
+const {} = Astro.props;
+---
+
+<footer class="footer">
+  <div class="footer__container">footer</div>
+</footer>
+
+<style is:global lang="scss">
+  .footer {
+    flex-grow: 0;
+
+    /* удалить при необходимости */
+    border-top: 1px solid gray;
+    min-height: 200px;
+
+    @include section;
+
+    &__container {
+      grid-area: center;
+    }
+  }
+</style>

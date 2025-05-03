@@ -86,11 +86,7 @@ $breakpoint-widescreen: 1536px; // tailwind 2xl
 
 @mixin section {
   --_container: 100%;
-
-  --container-offset: max(
-    calc(100vw - var(--_container)) / 2,
-    var(--container-padding)
-  );
+  --container-offset: var(--container-padding);
 
   display: grid;
   grid-template-columns:
@@ -103,6 +99,10 @@ $breakpoint-widescreen: 1536px; // tailwind 2xl
 
   @include phone-min {
     --_container: var(--container-phone);
+    --container-offset: max(
+      calc(var(--real-page-width, 100vw) - var(--_container)) / 2,
+      var(--container-padding)
+    );
   }
 
   @include tablet-min {

@@ -1,0 +1,68 @@
+---
+import Burger from "./Burger.astro";
+import Drawer from "./Drawer.astro";
+
+interface Props {}
+
+const {} = Astro.props;
+
+const mobileMenuTrigger = "mobile-menu";
+---
+
+<header class="header">
+  <div class="header__container">
+    <div class="header__mobile">
+      mobile header
+      <Burger id={mobileMenuTrigger} />
+    </div>
+    <div class="header__desktop">desktop header</div>
+  </div>
+  <Drawer trigger={mobileMenuTrigger} variant="primary" position="left">
+    <p>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam unde
+      suscipit ab autem optio beatae aliquid voluptas, illum sint a tenetur hic
+      excepturi, laudantium assumenda quam corrupti modi reiciendis ex.
+    </p>
+  </Drawer>
+</header>
+
+<style is:global lang="scss">
+  .header {
+    /* удалить при необходимости */
+    border-bottom: 1px solid gray;
+
+    z-index: 60;
+    flex-grow: 0;
+
+    @include section;
+
+    &__container {
+      grid-area: center;
+      z-index: 60;
+    }
+
+    &__mobile {
+      /* минимальная высота на мобилке */
+      min-height: 64px;
+
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      @include laptop-min {
+        display: none;
+      }
+    }
+
+    &__desktop {
+      /* удалить при необходимости */
+      min-height: 120px;
+
+      display: none;
+
+      @include laptop-min {
+        display: flex;
+      }
+    }
+  }
+</style>

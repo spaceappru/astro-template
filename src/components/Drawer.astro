@@ -1,0 +1,121 @@
+---
+interface Props {
+  /**
+   * id кнопки-триггера
+   */
+  trigger: string;
+
+  /**
+   * позиционирование
+   */
+  position?: "left" | "right" | "top" | "bottom";
+
+  variant: "primary" | "secondary";
+}
+
+const { trigger, position, variant } = Astro.props;
+---
+
+<div
+  class:list={["drawer", `drawer--${position}`, `drawer--${variant}`]}
+  data-drawer={trigger}
+  data-open="false"
+>
+  <div class="drawer__back" data-back></div>
+  <div class="drawer__container">
+    <div class="drawer__content">
+      <slot />
+    </div>
+  </div>
+</div>
+
+<style is:global lang="scss">
+  .drawer {
+    padding-top: var(--drawer-padding-top);
+    z-index: 50;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+
+    &__container {
+      /* ширина drawer */
+      width: var(--drawer-container-width);
+      background-color: var(--drawer-container-bg);
+      height: 100%;
+      overflow-y: auto;
+      scrollbar-width: thin;
+      transition: var(--transition);
+
+      @include section;
+    }
+
+    &__content {
+      grid-area: center;
+      position: relative;
+    }
+
+    &--left,
+    &--left &__container {
+      transform: translate(-100%, 0);
+      margin-right: auto;
+    }
+
+    &--right,
+    &--right &__container {
+      transform: translate(100%, 0);
+      margin-left: auto;
+    }
+
+    &--top,
+    &--top &__container {
+      transform: translate(0, -100%);
+    }
+
+    &--bottom,
+    &--bottom &__container {
+      transform: translate(0, 100%);
+    }
+
+    &[data-open="true"],
+    &[data-open="idle"] {
+      transform: translate(0);
+    }
+
+    &[data-open="true"] &__container {
+      transform: translate(0);
+    }
+
+    &__back {
+      z-index: -1;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 0;
+      width: 0;
+      transition: background-color var(--transition);
+    }
+
+    &[data-open="true"] &__back {
+      background-color: var(--drawer-back-bg);
+    }
+
+    &[data-open="true"] &__back,
+    &[data-open="idle"] &__back {
+      height: 100%;
+      width: 100vw;
+    }
+
+    &--primary {
+      --drawer-container-bg: white;
+      --drawer-padding-top: 64px;
+    }
+
+    &--secondary {
+      --drawer-container-width: min(100%, 500px);
+      --drawer-container-bg: white;
+      --drawer-back-bg: rgba(0, 0, 0, 0.25);
+    }
+  }
+</style>

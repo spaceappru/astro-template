@@ -1,0 +1,45 @@
+---
+interface Props {
+  id: string;
+}
+
+const { id } = Astro.props;
+---
+
+<button class="burger" id={id} data-open="false">
+  <span class="burger__icon icon-burger"></span>
+  <span class="burger__open icon-cross"></span>
+</button>
+
+<style is:global lang="scss">
+  .burger {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    &__icon {
+      font-size: 24px;
+    }
+
+    &__open {
+      font-size: 24px;
+    }
+
+    &[data-open="false"] &__icon {
+      display: inline;
+    }
+
+    &[data-open="false"] &__open {
+      display: none;
+    }
+
+    &[data-open="true"] &__icon {
+      display: none;
+    }
+
+    &[data-open="true"] &__open {
+      display: inline;
+    }
+  }
+</style>

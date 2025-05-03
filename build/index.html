@@ -11,12 +11,46 @@
     <!-- <link rel="stylesheet" href={choices} /> -->
     <!-- <link rel="stylesheet" href={tippy} /> -->
     <!-- <link rel="stylesheet" href={datepicker} /> -->
-    <link rel="stylesheet" href="./fonts/iconly/iconly.min.css?v=0.55629430" />
-    <script type="module" src="./js/general.js?v=0.55629430"></script>
-    <script type="module" src="./js/front-page.js?v=0.55629430"></script>
-    <link rel="stylesheet" href="./css/custom-style.css?v=0.55630610" />
+    <link rel="stylesheet" href="./fonts/iconly/iconly.min.css?v=0.04237227" />
+    <script type="module" src="./js/general.js?v=0.04237227"></script>
+    <script type="module" src="./js/front-page.js?v=0.04237227"></script>
+    <link rel="stylesheet" href="./css/custom-style.css?v=0.04238610" />
   </head>
   <body>
-    <main class="main">Главная страница</main>
+    <header class="header">
+      <div class="header__container">
+        <div class="header__mobile">
+          mobile header
+          <button class="burger" id="mobile-menu" data-open="false">
+            <span class="burger__icon icon-burger"></span>
+            <span class="burger__open icon-cross"></span>
+          </button>
+        </div>
+        <div class="header__desktop">desktop header</div>
+      </div>
+      <div
+        class="drawer drawer--left drawer--primary"
+        data-drawer="mobile-menu"
+        data-open="false"
+      >
+        <div class="drawer__back" data-back=""></div>
+        <div class="drawer__container">
+          <div class="drawer__content">
+            <p>
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam
+              unde suscipit ab autem optio beatae aliquid voluptas, illum sint a
+              tenetur hic excepturi, laudantium assumenda quam corrupti modi
+              reiciendis ex.
+            </p>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main class="main">
+      <div class="section section--center">
+        <div class="section__container">Главная страница</div>
+      </div>
+    </main>
+    <footer class="footer"><div class="footer__container">footer</div></footer>
   </body>
 </html>

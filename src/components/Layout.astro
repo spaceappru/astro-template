@@ -1,12 +1,14 @@
 ---
-import swiper from "swiper/swiper-bundle.css?url";
 import fancybox from "@fancyapps/ui/dist/fancybox/fancybox.css?url";
 import accordion from "accordion-js/dist/accordion.min.css?url";
 import choices from "choices.js/public/assets/styles/choices.min.css?url";
+import swiper from "swiper/swiper-bundle.css?url";
 import tippy from "tippy.js/dist/tippy.css?url";
 import datepicker from "vanilla-calendar-pro/styles/index.css?url";
-
 import "../styles/global.css";
+
+import Footer from "./Footer.astro";
+import Header from "./Header.astro";
 
 interface Props {
   /**
@@ -62,9 +64,11 @@ const version = String(Date.now()).substring(5);
     }
   </head>
   <body>
+    <Header />
     <main class="main">
       <slot />
     </main>
+    <Footer />
   </body>
 </html>
 
