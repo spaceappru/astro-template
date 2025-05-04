@@ -8,7 +8,8 @@
     "build-script": "vite build --config vite-ts.config.ts",
     "preview": "astro preview",
     "astro": "astro",
-    "format": "npx prettier build/*.html --write"
+    "format": "npx prettier build/*.html --write",
+    "generate-icons": "svgtofont --sources ./public/icons --output ./public/fonts/icons"
   },
   "dependencies": {
     "@fancyapps/ui": "^5.0.36",
@@ -51,7 +52,8 @@
     "typescript": "^5.8.3",
     "vite": "^6.3.4",
     "vite-plugin-run": "^0.6.1",
-    "vite-tsconfig-paths": "^5.1.4"
+    "vite-tsconfig-paths": "^5.1.4",
+    "svgtofont": "^6.3.2"
   },
   "packageManager": "pnpm@9.15.4+sha512.b2dc20e2fc72b3e18848459b37359a32064663e5627a51e4c74b2c29dd8e8e0491483c3abb40789cfd578bf362fb6ba8261b05f0387d76792ed6e23ea3b1b6a0"
 }

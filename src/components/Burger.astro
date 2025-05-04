@@ -1,4 +1,6 @@
 ---
+import Icon from "./Icon.astro";
+
 interface Props {
   id: string;
 }
@@ -7,8 +9,8 @@ const { id } = Astro.props;
 ---
 
 <button class="burger" id={id} data-open="false">
-  <span class="burger__icon icon-burger"></span>
-  <span class="burger__open icon-cross"></span>
+  <Icon icon="burger" class="burger__icon" />
+  <Icon icon="cross" class="burger__open" />
 </button>
 
 <style is:global lang="scss">

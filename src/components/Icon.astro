@@ -1,0 +1,12 @@
+---
+import type { IconsIcon } from "public/fonts/icons/icons";
+
+interface Props {
+  icon: IconsIcon;
+  class?: string;
+}
+
+const { icon, class: className } = Astro.props;
+---
+
+<span class:list={["icon", `icon-${icon}`, className]}></span>
