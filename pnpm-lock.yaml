@@ -115,7 +115,7 @@ importers:
         specifier: ^5.28.2
         version: 5.28.2
       typescript:
-        specifier: ~5.8.3
+        specifier: ^5.8.3
         version: 5.8.3
       vite:
         specifier: ^6.3.4
@@ -123,9 +123,6 @@ importers:
       vite-plugin-run:
         specifier: ^0.6.1
         version: 0.6.1
-      vite-plugin-watch-and-run:
-        specifier: ^1.7.4
-        version: 1.7.4
       vite-tsconfig-paths:
         specifier: ^5.1.4
         version: 5.1.4(typescript@5.8.3)(vite@6.3.4(@types/node@22.15.3)(jiti@2.4.2)(lightningcss@1.29.2)(sass-embedded@1.87.0))
@@ -509,10 +506,6 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.25':
     resolution: {integrity: sha512-vNk6aEwybGtawWmy/PzwnGDOjCkLWSD2wqvjGGAgOAwCGWySYXfYoxt00IJkTF+8Lb57DwOb3Aa0o9CApepiYQ==}
-
-  '@kitql/helpers@0.8.12':
-    resolution: {integrity: sha512-aAihk32Ym8XFtwP1mwpuvG5J0Ov2LTnIVItJZI31bTnmlQ5tYSaYgvnD44lNiAjHQw0/tUstqIYRPK8C6wlLoA==}
-    engines: {node: ^16.14 || >=18}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -2758,10 +2751,6 @@ packages:
   vite-plugin-run@0.6.1:
     resolution: {integrity: sha512-mXEEQHWhk/OD8XuK7V517eDPnXS5OrzjGsihHihSbWNFXqEBy6WNkdLNIfPY1o86JLLRDVq3VeVus3YOTiJeGg==}
 
-  vite-plugin-watch-and-run@1.7.4:
-    resolution: {integrity: sha512-JgL2hi7hN5ZRR2gmmLthTU8vn6CBSQPpaBisUyh5Sy3j2LT1Y6HWFVdsH300465Tk5bRY/1Aks6dPpeUW9mhYw==}
-    engines: {node: ^16.14 || >=18}
-
   vite-tsconfig-paths@5.1.4:
     resolution: {integrity: sha512-cYj0LRuLV2c2sMqhqhGpaO3LretdtMn/BVX4cPLanIZuwwrkVl+lK84E/miEXkCHWXuq65rhNN4rXsBcOB3S4w==}
     peerDependencies:
@@ -3244,10 +3233,6 @@ snapshots:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
-
-  '@kitql/helpers@0.8.12':
-    dependencies:
-      esm-env: 1.2.2
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
@@ -5727,11 +5712,6 @@ snapshots:
       picocolors: 1.1.1
     transitivePeerDependencies:
       - supports-color
-
-  vite-plugin-watch-and-run@1.7.4:
-    dependencies:
-      '@kitql/helpers': 0.8.12
-      micromatch: 4.0.8
 
   vite-tsconfig-paths@5.1.4(typescript@5.8.3)(vite@6.3.4(@types/node@22.15.3)(jiti@2.4.2)(lightningcss@1.29.2)(sass-embedded@1.87.0)):
     dependencies:
