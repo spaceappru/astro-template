@@ -33,6 +33,16 @@ interface Props {
    * Позиция дочернего элемента начиная с widescreen
    */
   widescreen?: Positions;
+
+  /**
+   * Верхний отступ (редактируемый)
+   */
+  top?: "small" | "medium" | "large";
+
+  /**
+   * Нижний отступ (редактируемый)
+   */
+  bottom?: "small" | "medium" | "large";
 }
 
 const {
@@ -42,6 +52,8 @@ const {
   laptop,
   tablet,
   phone,
+  bottom,
+  top,
 } = Astro.props;
 ---
 
@@ -54,6 +66,8 @@ const {
     laptop && `section--laptop-${laptop}`,
     tablet && `section--tablet-${tablet}`,
     phone && `section--phone-${phone}`,
+    bottom && `section--bottom-${bottom}`,
+    top && `section--top-${top}`,
   ]}
 >
   <div class="section__container">
@@ -70,14 +84,6 @@ const {
     @each $position in $positions {
       &--#{$position} {
         --section-position: #{$position};
-      }
-    }
-
-    @each $position in $positions {
-      @include phone-min {
-        &--phone-#{$position} {
-          --section-position: #{$position};
-        }
       }
     }
 
@@ -116,6 +122,62 @@ const {
     &__container {
       display: grid;
       grid-area: var(--section-position);
+    }
+
+    &--top {
+      &-small {
+        padding-top: 20px;
+      }
+
+      &-medium {
+        padding-top: 20px;
+      }
+
+      &-large {
+        padding-top: 20px;
+      }
+
+      @include laptop-min {
+        &-small {
+          padding-top: 40px;
+        }
+
+        &-medium {
+          padding-top: 50px;
+        }
+
+        &-large {
+          padding-top: 60px;
+        }
+      }
+    }
+
+    &--bottom {
+      &-small {
+        padding-bottom: 60px;
+      }
+
+      &-medium {
+        padding-bottom: 60px;
+      }
+
+      &-large {
+        padding-bottom: 60px;
+      }
+
+      @include laptop-min {
+        &-small {
+          padding-bottom: 90px;
+        }
+
+        &-medium {
+          padding-bottom: 120px;
+        }
+
+        &-large {
+          padding-bottom: 150px;
+        }
+      }
     }
   }
 </style>

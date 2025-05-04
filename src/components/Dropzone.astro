@@ -1,0 +1,78 @@
+---
+import type { DropzoneProps } from "@type/dropzone";
+
+interface Props extends DropzoneProps {}
+
+const { ...restProps } = Astro.props;
+---
+
+<spaceapp-dropzone {...restProps}></spaceapp-dropzone>
+
+<style is:global lang="scss">
+  .dropzone {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    &__input {
+      width: 100%;
+      padding: 20px;
+      border: 2px dashed gray;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+
+      transition: var(--transition);
+
+      &--active {
+        background-color: var(--color-slate-100);
+      }
+
+      &-icon {
+        font-size: 24px;
+      }
+    }
+
+    &__text {
+      font-weight: 500;
+    }
+
+    &__list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    &__item {
+      display: grid;
+      grid-template-columns: auto 1fr auto auto;
+      gap: 8px;
+      align-items: center;
+
+      &-icon {
+        font-size: 20px;
+      }
+    }
+
+    &__name {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    &__size {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    &__clear {
+      cursor: pointer;
+
+      &-icon {
+        font-size: 12px;
+      }
+    }
+  }
+</style>

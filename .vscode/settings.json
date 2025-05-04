@@ -4,5 +4,5 @@
   },
   "editor.formatOnSave": true,
   "svelte.enable-ts-plugin": true,
-  "cSpell.words": ["spaceapp"]
+  "cSpell.words": ["dropzone", "spaceapp"]
 }

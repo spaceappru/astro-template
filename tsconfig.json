@@ -13,7 +13,8 @@
       "ymaps3": ["./node_modules/@yandex/ymaps3-types"],
       "@components/*": ["src/components/*"],
       "@lib/*": ["src/scripts/lib/*"],
-      "@svelte/*": ["src/scripts/svelte/*"]
+      "@svelte/*": ["src/scripts/svelte/*"],
+      "@type/*": ["src/scripts/types/*"]
     }
   }
 }
