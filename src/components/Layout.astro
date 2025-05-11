@@ -5,6 +5,9 @@ import choices from "choices.js/public/assets/styles/choices.min.css?url";
 import swiper from "swiper/swiper-bundle.css?url";
 import tippy from "tippy.js/dist/tippy.css?url";
 import datepicker from "vanilla-calendar-pro/styles/index.css?url";
+import glide from "@glidejs/glide/dist/css/glide.core.min.css?url";
+import lightgallery from "lightgallery/css/lightgallery-bundle.min.css?url";
+
 import "../styles/global.css";
 
 import Footer from "./Footer.astro";
@@ -30,6 +33,27 @@ interface Props {
 const { title, scripts, ymap } = Astro.props;
 
 const version = String(Date.now()).substring(5);
+
+const isProd = import.meta.env.PROD;
+const isDev = import.meta.env.DEV;
+
+const ymapSrc = `https://api-maps.yandex.ru/v3/?apikey=${import.meta.env.PUBLIC_YMAP_API_KEY}&lang=ru_RU`;
+const generalSrc = `/js/general.js?v=0.${version}`;
+const scriptsStc = scripts?.map((s) => `/js/${s}.js?v=0.${version}`);
+
+/**
+ * Подключение стилей библиотек
+ */
+const styles: string[] = [
+  // fancybox,
+  // accordion,
+  // choices,
+  // swiper,
+  // tippy,
+  // datepicker,
+  // glide,
+  // lightgallery,
+];
 ---
 
 <html lang="ru">
@@ -38,28 +62,13 @@ const version = String(Date.now()).substring(5);
     <meta name="viewport" content="width=device-width" />
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <!-- <link rel="stylesheet" href={swiper} /> -->
-    <!-- <link rel="stylesheet" href={fancybox} /> -->
-    <!-- <link rel="stylesheet" href={accordion} /> -->
-    <!-- <link rel="stylesheet" href={choices} /> -->
-    <!-- <link rel="stylesheet" href={tippy} /> -->
-    <!-- <link rel="stylesheet" href={datepicker} /> -->
+    {styles.map((style) => <link rel="stylesheet" href={style} />)}
     <link rel="stylesheet" href=`/fonts/icons/icons.css?v=0.${version}` />
+    {ymap && <script is:inline src={ymapSrc} defer />}
+    {isProd && <script is:inline type="module" src={generalSrc} />}
     {
-      ymap ? (
-        <script
-          is:inline
-          src={`https://api-maps.yandex.ru/v3/?apikey=${import.meta.env.PUBLIC_YMAP_API_KEY}&lang=ru_RU`}
-          defer
-        />
-      ) : null
-    }
-    <script is:inline type="module" src={`/js/general.js?v=0.${version}`}
-    ></script>
-    {
-      scripts?.map((item) => (
-        <script is:inline type="module" src={`/js/${item}.js?v=0.${version}`} />
-      ))
+      isProd &&
+        scriptsStc?.map((s) => <script is:inline type="module" src={s} />)
     }
   </head>
   <body>
@@ -70,6 +79,8 @@ const version = String(Date.now()).substring(5);
     <Footer />
   </body>
 </html>
+
+{isDev ? <script src="../scripts/dev.ts" /> : null}
 
 <style is:global lang="scss">
   // Вариативный шрифт

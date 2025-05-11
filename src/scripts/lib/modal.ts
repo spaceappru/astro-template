@@ -1,5 +1,9 @@
-import { Fancybox } from "@fancyapps/ui";
+/**
+ * Документация: https://micromodal.vercel.app/
+ */
 
-Fancybox.bind(".js-modal", {
-  // Your custom options
+import MicroModal from "micromodal";
+
+MicroModal.init({
+  awaitCloseAnimation: true,
 });

@@ -15,7 +15,7 @@
     align-items: center;
     justify-content: center;
 
-    a {
+    & a {
       cursor: pointer;
       transition: var(--transition);
     }
@@ -51,7 +51,7 @@
     }
 
     /* элементы страниц */
-    a:not(&__prev, &__next) {
+    & a:not(&__prev, &__next) {
       width: 32px;
       height: 32px;
 
@@ -67,7 +67,7 @@
       }
     }
 
-    .active {
+    & .active {
       background-color: black;
       color: white;
     }

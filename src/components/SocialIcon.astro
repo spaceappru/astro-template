@@ -1,0 +1,80 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  /**
+   * Вариации цветов
+   */
+  variant: "black" | "gray";
+
+  /**
+   * Вариации размеров
+   *
+   * small = 24px
+   *
+   * medium = 40px
+   *
+   * large = 64px
+   */
+  size: "small" | "medium" | "large";
+
+  /**
+   * Иконки
+   */
+  icon: "vk" | "telegram" | "whatsapp";
+
+  href: string;
+}
+
+const { variant, size, icon, href } = Astro.props;
+---
+
+<a
+  href={href}
+  class:list={[
+    "social-icon",
+    `social-icon--${variant}`,
+    `social-icon--${size}`,
+  ]}
+>
+  <Icon icon={icon} />
+</a>
+
+<style is:global lang="scss">
+  .social-icon {
+    line-height: 1;
+    transition: var(--transition);
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &--black {
+      color: black;
+
+      &:hover {
+        color: gray;
+      }
+    }
+
+    &--gray {
+      color: gray;
+
+      &:hover {
+        color: black;
+      }
+    }
+
+    &--small {
+      font-size: 24px;
+    }
+
+    &--medium {
+      font-size: 40px;
+    }
+
+    &--large {
+      font-size: 64px;
+    }
+  }
+</style>

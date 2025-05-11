@@ -4,5 +4,6 @@
   },
   "editor.formatOnSave": true,
   "svelte.enable-ts-plugin": true,
-  "cSpell.words": ["dropzone", "spaceapp"]
+  "cSpell.words": ["dropzone", "spaceapp", "ymap", "ymaps3"],
+  "cSpell.ignorePaths": ["**/js/**"]
 }

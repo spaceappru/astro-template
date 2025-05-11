@@ -4,12 +4,21 @@ interface Props {
    * список элементов
    */
   items: string[];
+
+  /**
+   * Вариация
+   *
+   * dot = точка
+   *
+   * icon = иконка
+   */
+  variant: "dot" | "icon";
 }
 
-const { items } = Astro.props;
+const { items, variant } = Astro.props;
 ---
 
-<div class:list={["breadcrumb"]}>
+<div class:list={["breadcrumb", `breadcrumb--${variant}`]}>
   <div class="breadcrumb__container">
     <span>
       {
@@ -28,14 +37,21 @@ const { items } = Astro.props;
   .breadcrumb {
     /* цвет ссылки */
     --breadcrumb-link-color: gray;
+    --breadcrumb-link-color-hover: blue;
+
     /* цвет последнего элемента */
     --breadcrumb-last-color: black;
+
     /* цвет маркера */
     --breadcrumb-marker-color: black;
+    --breadcrumb-marker-color-hover: blue;
+
+    /* иконка в маркере https://www.svgbackgrounds.com/tools/svg-to-css/ */
+    --breadcrumb-icon: url('data:image/svg+xml,<svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.7996 8.50679C10.7997 8.59784 10.7819 8.68801 10.7472 8.77212C10.7126 8.85623 10.6617 8.93262 10.5975 8.99691L6.64365 12.9704C6.51431 13.1004 6.33889 13.1735 6.15598 13.1735C5.97307 13.1735 5.79765 13.1004 5.66831 12.9704C5.53897 12.8405 5.46631 12.6642 5.46631 12.4803C5.46631 12.2965 5.53897 12.1202 5.66831 11.9902L9.13452 8.50679L5.66831 5.02338C5.60427 4.95901 5.55347 4.8826 5.51881 4.79851C5.48415 4.71441 5.46631 4.62428 5.46631 4.53326C5.46631 4.44223 5.48415 4.3521 5.51881 4.26801C5.55347 4.18391 5.60427 4.1075 5.66831 4.04314C5.73235 3.97878 5.80838 3.92772 5.89205 3.89289C5.97573 3.85806 6.06541 3.84013 6.15598 3.84013C6.24655 3.84013 6.33623 3.85806 6.41991 3.89289C6.50358 3.92772 6.57961 3.97878 6.64365 4.04314L10.5975 8.01668C10.6617 8.08097 10.7126 8.15736 10.7472 8.24147C10.7819 8.32558 10.7997 8.41575 10.7996 8.50679Z" fill="%2390A1B9"/></svg>');
 
     font-size: 14px;
 
-    a {
+    & a {
       padding-right: 18px;
       transition: var(--transition);
       color: var(--breadcrumb-link-color);
@@ -44,30 +60,51 @@ const { items } = Astro.props;
 
   /* hover на ссылку */
   .breadcrumb a:hover {
-    /* цвет hover ссылки */
-    --breadcrumb-link-color: blue;
+    --breadcrumb-link-color: var(--breadcrumb-link-color-hover);
   }
 
   /* изменение маркера при hover на ссылку */
   .breadcrumb__container span span:hover + span a::before,
   .breadcrumb__container span span:hover + .breadcrumb_last::before {
-    /* цвет hover маркера */
-    --breadcrumb-marker-color: blue;
+    --breadcrumb-marker-color: var(--breadcrumb-marker-color-hover);
   }
 
-  /* маркер между элементами*/
+  /* маркер между элементами (общие стили) */
   .breadcrumb__container span:not(:first-child) a::before,
   .breadcrumb_last::before {
     content: "";
+    background-color: var(--breadcrumb-marker-color);
+    display: inline-flex;
+    margin-right: 20px;
+  }
+
+  /* точка между элементами*/
+  .breadcrumb--dot .breadcrumb__container span:not(:first-child) a::before,
+  .breadcrumb--dot .breadcrumb_last::before {
     height: 6px;
     width: 6px;
     background-color: var(--breadcrumb-marker-color);
-    display: inline-flex;
     border-radius: 999px;
-    margin-right: 20px;
 
     /* вертикальное выравнивание маркера */
     vertical-align: 2px;
+  }
+
+  /* иконка между элементами*/
+  .breadcrumb--icon .breadcrumb__container span:not(:first-child) a::before,
+  .breadcrumb--icon .breadcrumb_last::before {
+    background-color: var(--breadcrumb-marker-color);
+    mask: var(--breadcrumb-icon);
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: cover;
+
+    /* размеры иконки */
+    height: 16px;
+    width: 16px;
+
+    /* вертикальное выравнивание маркера */
+    vertical-align: -3px;
   }
 
   .breadcrumb_last {

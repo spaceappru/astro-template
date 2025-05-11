@@ -7,3 +7,5 @@ import { initPageWidth } from "@lib/page-width";
 
 initPageWidth();
 initDrawer({ id: "mobile-menu" });
+
+import "@lib/modal";

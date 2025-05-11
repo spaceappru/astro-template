@@ -1,6 +1,5 @@
 ---
 import type { HTMLAttributes } from "astro/types";
-import { undefined } from "astro:schema";
 
 interface Props extends Omit<HTMLAttributes<"button">, "class"> {
   /**
@@ -10,31 +9,37 @@ interface Props extends Omit<HTMLAttributes<"button">, "class"> {
   /**
    * Вариации цветов
    */
-  variant?: undefined;
+  variant: "black" | "white";
   /**
    * Вариации размеров
    */
-  size?: undefined;
+  size: "small" | "medium";
 
   /**
-   * Класс-селектор в файле scripts/lib/modal.ts
+   * Вариации шрифта
    */
-  modal?: "js-modal";
+  font?: "small" | "medium";
+
+  /**
+   * id модального окна
+   */
+  modal?: string;
 }
 
-const { href, variant, modal, size, ...restProps } = Astro.props;
+const { href, variant, modal, size, font, ...restProps } = Astro.props;
 
 const Element = href ? "a" : "button";
 ---
 
 <Element
   {...restProps}
+  data-micromodal-trigger={modal}
   href={href}
   class:list={[
     "button",
-    variant && `button--${variant}`,
-    variant && `button--${size}`,
-    href && modal ? modal : undefined,
+    `button--variant-${variant}`,
+    `button--size-${size}`,
+    font && `button--font-${font}`,
   ]}
 >
   <slot />
@@ -50,5 +55,51 @@ const Element = href ? "a" : "button";
     display: flex;
     align-items: center;
     justify-content: center;
+    line-height: 1.2;
+
+    &--variant {
+      &-black {
+        color: white;
+        background-color: black;
+
+        &:hover {
+          background-color: gray;
+        }
+      }
+
+      &-white {
+        color: black;
+        background-color: white;
+        border: 1px solid black;
+
+        &:hover {
+          background-color: gray;
+        }
+      }
+    }
+
+    &--size {
+      &-small {
+        min-height: 42px;
+        padding-inline: 20px;
+      }
+
+      &-medium {
+        min-height: 56px;
+        padding-inline: 20px;
+      }
+    }
+
+    &--font {
+      &-small {
+        font-weight: 500;
+        font-size: 14px;
+      }
+
+      &-medium {
+        font-weight: 600;
+        font-size: 16px;
+      }
+    }
   }
 </style>

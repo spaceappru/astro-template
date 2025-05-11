@@ -1,12 +1,23 @@
 // @ts-check
-import { defineConfig } from "astro/config";
-import { run } from "vite-plugin-run";
-import relativeLinks from "astro-relative-links";
+import { svelte } from "@sveltejs/vite-plugin-svelte";
 import tailwindcss from "@tailwindcss/vite";
+import relativeLinks from "astro-relative-links";
+import { defineConfig } from "astro/config";
+import { developmentEntity } from "./plugin-development-entity";
+import { htmlAfterBuild } from "./plugin-html-after-build";
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [relativeLinks()],
+  integrations: [
+    relativeLinks(),
+    developmentEntity({
+      inputDir: "src/scripts/entity",
+      outputFile: "src/scripts/dev.ts",
+      recursive: true,
+      watch: true,
+    }),
+    htmlAfterBuild(),
+  ],
   trailingSlash: "never",
   devToolbar: { enabled: false },
   build: {
@@ -16,16 +27,8 @@ export default defineConfig({
   outDir: "build",
   scopedStyleStrategy: "class",
   vite: {
-    plugins: [
-      run([
-        {
-          name: "typescript transform",
-          run: ["vite build --config vite-ts.config.ts"],
-          pattern: ["src/scripts/**/*.ts", "src/scripts/**/*.svelte"],
-        },
-      ]),
-      tailwindcss(),
-    ],
+    optimizeDeps: { exclude: ["melt/builders"] },
+    plugins: [svelte(), tailwindcss()],
     build: {
       assetsInlineLimit: 0,
       cssCodeSplit: false,

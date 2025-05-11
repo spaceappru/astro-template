@@ -1,0 +1,138 @@
+---
+import Icon from "./Icon.astro";
+
+interface Props {
+  /**
+   * максимальная ширина модального окна
+   */
+  width: "small" | "medium";
+
+  /**
+   * закрытие модального окна по клику вне
+   *
+   * @default true
+   */
+  overlayClose?: boolean;
+
+  id: string;
+}
+
+const { width, id, overlayClose = true } = Astro.props;
+---
+
+<div class:list={["modal", `modal--${width}`]} id={id} aria-hidden="true">
+  <div
+    tabindex="-1"
+    class="modal__overlay"
+    data-micromodal-close={overlayClose}
+  >
+    <div class="modal__container" role="dialog" aria-modal="true">
+      <button class="modal__close" data-micromodal-close>
+        <Icon icon="cross" />
+      </button>
+      <div class="modal__content">
+        <slot>
+          <p>Контент отсутствует</p>
+        </slot>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style is:global lang="scss">
+  .modal {
+    display: none;
+    z-index: 70;
+
+    &.is-open {
+      display: block;
+    }
+
+    &__overlay {
+      background-color: rgba(0, 0, 0, 0.5);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+
+      display: grid;
+      place-items: center;
+      padding: var(--container-padding);
+    }
+
+    &__container {
+      border-radius: 10px;
+      width: min(100%, var(--modal-width));
+      max-height: 100%;
+      overflow: auto;
+      scrollbar-width: thin;
+      position: relative;
+    }
+
+    &__content {
+      background-color: white;
+      width: 100%;
+      height: 100%;
+      padding: 20px;
+      min-height: 100px;
+    }
+
+    /* максимальная ширина модального окна */
+    &--small {
+      --modal-width: 464px;
+    }
+
+    &--medium {
+      --modal-width: 640px;
+    }
+
+    /* крестик закрытия модального окна */
+    &__close {
+      line-height: 1;
+      font-size: 32px;
+      cursor: pointer;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+
+      &:hover {
+        color: gray;
+      }
+    }
+  }
+
+  @keyframes modalFadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes modalFadeOut {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  .modal[aria-hidden="false"] .modal__overlay {
+    animation: modalFadeIn 0.25s cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .modal[aria-hidden="true"] .modal__overlay {
+    animation: modalFadeOut 0.1s cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  .modal__overlay {
+    will-change: transform;
+  }
+</style>

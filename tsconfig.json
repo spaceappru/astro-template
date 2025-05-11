@@ -15,7 +15,8 @@
       "@components/*": ["src/components/*"],
       "@lib/*": ["src/scripts/lib/*"],
       "@svelte/*": ["src/scripts/svelte/*"],
-      "@type/*": ["src/scripts/types/*"]
+      "@type/*": ["src/scripts/types/*"],
+      "@utils/*": ["src/scripts/utils/*"]
     }
   }
 }

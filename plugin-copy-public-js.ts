@@ -1,7 +1,6 @@
-// vite-plugin-copy-files.ts
-import type { Plugin } from "vite";
 import fs from "fs-extra";
 import path from "path";
+import type { Plugin } from "vite";
 
 interface CopyFilesOptions {
   sourceDir: string;
@@ -9,7 +8,7 @@ interface CopyFilesOptions {
   flatten?: boolean; // Optional: Whether to flatten the directory structure
 }
 
-function copyFiles(options: CopyFilesOptions): Plugin {
+export function copyPublicJs(options: CopyFilesOptions): Plugin {
   return {
     name: "copy-files",
     apply: "build", // Apply this plugin after the build
@@ -41,5 +40,3 @@ function copyFiles(options: CopyFilesOptions): Plugin {
     },
   };
 }
-
-export default copyFiles;
