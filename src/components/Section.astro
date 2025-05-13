@@ -88,6 +88,14 @@ const {
     }
 
     @each $position in $positions {
+      @include phone-min {
+        &--phone-#{$position} {
+          --section-position: #{$position};
+        }
+      }
+    }
+
+    @each $position in $positions {
       @include tablet-min {
         &--tablet-#{$position} {
           --section-position: #{$position};
