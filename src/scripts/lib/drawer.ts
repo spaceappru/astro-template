@@ -39,6 +39,16 @@ export function initDrawer({ id, duration = 200 }: DrawerArgs) {
     document.getElementsByTagName("html")[0].style.overflow = "hidden";
     open = true;
     setTriggers();
+
+    //@ts-ignore
+    if (typeof CloseWatcher !== "undefined") {
+      //@ts-ignore
+      let watcher = new CloseWatcher();
+      watcher.onclose = () => {
+        closeDrawer();
+        watcher.destroy();
+      };
+    }
   }
 
   function closeDrawer() {
