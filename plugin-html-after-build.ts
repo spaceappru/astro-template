@@ -4,7 +4,6 @@ import fs from "node:fs/promises";
 
 import type { AstroIntegration } from "astro";
 
-// Helper function to recursively remove comment nodes
 function removeComments(node: Node) {
   const children = node.childNodes;
 
@@ -38,7 +37,6 @@ export function htmlAfterBuild(): AstroIntegration {
             const { document } = dom.window;
             const links = Array.from(document.head.querySelectorAll("link"));
 
-            // Find the last stylesheet link
             const styleLink = [...links]
               .reverse()
               .find((link) => link.rel === "stylesheet");
@@ -50,8 +48,7 @@ export function htmlAfterBuild(): AstroIntegration {
               styleLink.setAttribute("href", newHref);
             }
 
-            // Strip HTML comments
-            removeComments(document.documentElement); // ← Правильный вызов
+            removeComments(document.documentElement);
 
             const updatedHtml = dom.serialize();
             await fs.writeFile(file, updatedHtml);
