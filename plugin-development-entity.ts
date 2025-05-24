@@ -39,9 +39,14 @@ export function developmentEntity(
               fs.mkdirSync(outputDir, { recursive: true });
             }
 
-            const entities = files.map(
-              (e) => `import "./entity/${path.parse(e).name}";`,
-            );
+            const entities = files
+              .map((e) => `import "./entity/${path.parse(e).name}";`)
+              .sort((a, b) => {
+                if (a.includes('general"')) return -1;
+                if (b.includes('general"')) return 1;
+                return 0;
+              });
+
             // Write as TS imports
             fs.writeFileSync(
               resolvedOptions.outputFile,
