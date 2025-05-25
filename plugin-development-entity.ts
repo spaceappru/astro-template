@@ -21,6 +21,7 @@ export function developmentEntity(
   };
 
   let watcher: FSWatcher | undefined;
+  let pagesWatcher: FSWatcher | undefined;
 
   return {
     name: "development-entity",
@@ -38,6 +39,32 @@ export function developmentEntity(
             if (!fs.existsSync(outputDir)) {
               fs.mkdirSync(outputDir, { recursive: true });
             }
+
+            // --- Автосоздание entity-скриптов по страницам, кроме index.astro ---
+            const pagesDir = path.resolve("src/pages");
+            const entityDir = path.resolve("src/scripts/entity");
+            if (!fs.existsSync(entityDir)) {
+              fs.mkdirSync(entityDir, { recursive: true });
+            }
+            const pageFiles = fs
+              .readdirSync(pagesDir)
+              .filter((f) => f.endsWith(".astro") && f !== "index.astro")
+              .map((f) => path.parse(f).name);
+
+            pageFiles.forEach((name) => {
+              const entityPath = path.join(entityDir, `${name}.ts`);
+              if (!fs.existsSync(entityPath)) {
+                fs.writeFileSync(
+                  entityPath,
+                  `/**
+ *  Файл скриптов для страницы ${name}
+ */\n\n`,
+                  "utf8",
+                );
+                logger.info(`Создан скрипт: src/scripts/entity/${name}.ts`);
+              }
+            });
+            // --- Конец автосоздания ---
 
             const entities = files
               .map((e) => `import "./entity/${path.parse(e).name}";`)
@@ -71,7 +98,7 @@ export function developmentEntity(
         generateFileList();
 
         if (command === "dev" && resolvedOptions.watch) {
-          // Set up watcher only in dev mode
+          // Watch src (как было)
           watcher = fs.watch(
             resolvedOptions.inputDir,
             { recursive: resolvedOptions.recursive },
@@ -79,6 +106,11 @@ export function developmentEntity(
               generateFileList();
             },
           );
+          // Watch src/pages для автосоздания entity-скриптов
+          const pagesDir = path.resolve("src/pages");
+          pagesWatcher = fs.watch(pagesDir, {}, () => {
+            generateFileList();
+          });
         }
       },
 
@@ -87,9 +119,8 @@ export function developmentEntity(
       },
 
       "astro:server:done": () => {
-        if (watcher) {
-          watcher.close();
-        }
+        if (watcher) watcher.close();
+        if (pagesWatcher) pagesWatcher.close();
       },
     },
   };
