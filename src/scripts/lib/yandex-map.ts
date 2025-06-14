@@ -52,6 +52,7 @@ export async function initYandexMap({ selector, points, YMapProps }: MapArgs) {
       markerElement.style.width = `${width}px`;
       markerElement.style.height = `${height}px`;
       markerElement.style.maxWidth = "unset";
+      markerElement.style.transform = `translate(-${width / 2}px, -${height}px)`;
       map.addChild(new YMapMarker({ coordinates }, markerElement));
     });
   }
