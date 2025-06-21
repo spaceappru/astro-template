@@ -1,4 +1,5 @@
-import IMask, { type MaskedNumberOptions } from "imask";
+import type { MaskedNumberOptions } from "imask";
+import IMask from "imask/holder";
 import "imask/masked/number";
 
 export const maskOptions: MaskedNumberOptions = {
