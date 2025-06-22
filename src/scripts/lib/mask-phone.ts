@@ -4,8 +4,8 @@ import "imask/masked/pattern";
 
 const maskOptions: MaskedPatternOptions = {
   mask: "+{7} (\\900) 000-00-00",
-  prepare: function (value) {
-    if (value.startsWith("8")) {
+  prepare: function (value, mask) {
+    if (mask.value === "" && value.startsWith("8")) {
       return "7" + value.slice(1);
     }
     return value;
