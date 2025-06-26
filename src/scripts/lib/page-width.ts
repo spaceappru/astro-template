@@ -1,8 +1,6 @@
 function setRealPageWidth() {
-  document.documentElement.style.setProperty(
-    "--real-page-width",
-    `${document.documentElement.clientWidth}px`,
-  );
+  const page = document.documentElement;
+  page.style.setProperty("--real-page-width", `${page.clientWidth}px`);
 }
 
 /**
@@ -10,6 +8,5 @@ function setRealPageWidth() {
  */
 export function initPageWidth() {
   setRealPageWidth();
-
   window.addEventListener("resize", setRealPageWidth);
 }

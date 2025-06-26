@@ -30,7 +30,7 @@ interface MapArgs {
   }[];
 }
 
-const PATH = (import.meta.env.PUBLIC_YMAP_IMAGE_PATH || "").trim();
+const PATH = (import.meta.env.PUBLIC_BUILD_PATH || "").trim();
 
 export async function initYandexMap({ selector, points, YMapProps }: MapArgs) {
   await ymaps3.ready;
