@@ -42,25 +42,27 @@ export function sendContactForm({
         headers,
       };
 
-      // кастомный ивент, используемый для обработки успешной отправки формы во внешних скриптах
-      // например, для отправки Яндекс.Метрики
-      const successEvent = new CustomEvent("spaceAppFormSubmitSuccess", {
-        bubbles: true,
-        detail: {
-          response: {
-            //@ts-ignore
-            success: response?.success,
-            //@ts-ignore
-            message: response?.message,
-          },
-          data: { id: form.id ?? "NO FORM ID PROVIDED" },
-        },
-      });
-
       const response = await fetch(DOMAIN_URL + FORM_PATH, requestOptions);
       if (response.ok) {
+        // кастомный ивент, используемый для обработки успешной отправки формы во внешних скриптах
+        // например, для отправки Яндекс.Метрики
+        const successEvent = new CustomEvent("spaceAppFormSubmitSuccess", {
+          bubbles: true,
+          detail: {
+            response: {
+              //@ts-ignore
+              success: response?.success,
+              //@ts-ignore
+              message: response?.message,
+            },
+            data: { id: form.id ?? "NO FORM ID PROVIDED" },
+          },
+        });
         form.dispatchEvent(successEvent);
         onSuccess();
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData);
       }
     } catch (error) {
       onError?.(error);
