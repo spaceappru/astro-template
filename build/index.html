@@ -1,51 +1,33 @@
 <!doctype html>
 <html lang="ru">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
     <title>Главная страница</title>
-    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
-    <link rel="stylesheet" href="./fonts/icons/icons.css?v=0.84166534" />
-    <script type="module" src="./js/general.js?v=0.84166534"></script>
-    <script type="module" src="./js/front-page.js?v=0.84166534"></script>
-    <link rel="stylesheet" href="./css/custom-style.css?v=0.84166537" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+    <link rel="stylesheet" href="./fonts/icons/icons.css?v=0.90393449">
+    <script type="module" src="./js/general.js?v=0.90393449"></script>
+    <script type="module" src="./js/front-page.js?v=0.90393449"></script>
+    <link rel="stylesheet" href="./css/custom-style.css?v=0.90393452">
   </head>
   <body>
     <header class="header">
       <div class="header__container">
         <div class="header__mobile">
           mobile header
-          <button class="burger" id="mobile-menu" data-open="false">
-            <span class="icon icon-burger burger__icon"></span>
-            <span class="icon icon-cross burger__open"></span>
-          </button>
+          <button class="burger" id="mobile-menu" data-open="false"><span class="icon icon-burger burger__icon"></span> <span class="icon icon-cross burger__open"></span></button>
         </div>
         <div class="header__desktop">desktop header</div>
       </div>
-      <div
-        class="drawer drawer--left drawer--primary"
-        data-drawer="mobile-menu"
-        data-open="false"
-      >
+      <div class="drawer drawer--left drawer--primary" data-drawer="mobile-menu" data-open="false">
         <div class="drawer__back" data-back=""></div>
         <div class="drawer__container">
-          <div class="drawer__content">
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam
-              unde suscipit ab autem optio beatae aliquid voluptas, illum sint a
-              tenetur hic excepturi, laudantium assumenda quam corrupti modi
-              reiciendis ex.
-            </p>
-          </div>
+          <div class="drawer__content"><p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam unde suscipit ab autem optio beatae aliquid voluptas, illum sint a tenetur hic excepturi, laudantium assumenda quam corrupti modi reiciendis ex.</p></div>
         </div>
       </div>
     </header>
     <main class="main">
-      <div class="section section--center">
-        <div class="section__container">
-          <input class="input input--phone" />
-        </div>
-      </div>
+      <div class="section section--center"><div class="section__container">Главная страница</div></div>
     </main>
     <footer class="footer"><div class="footer__container">footer</div></footer>
   </body>
